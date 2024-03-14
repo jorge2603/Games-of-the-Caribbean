@@ -8,12 +8,6 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'Games-of-the-Caribbean';
-
-
-  toggleTheme() {
-    const element = document.body;
-    element.dataset['bsTheme'] = element.dataset['bsTheme'] === 'dark' ? 'light' : 'dark';
-  }
 }
 
 
