@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+.h1 {
+    text-align: center;
+    margin: 10px;
+}
+
+.navbar {
+
+    background-color: black;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 100px auto;
+
+
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px;
+    border: 1px solid lightgray;
+
+}
+
+.table td {
+    border-bottom-width: 0px;
+}
+
+.table th {
+    border-bottom-width: 0px;
+    border: 0px;
+
+}
+.container-fluid {
+    max-width: 1280px;
+}
