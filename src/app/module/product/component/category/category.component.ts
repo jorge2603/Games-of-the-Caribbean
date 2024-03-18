@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../../_model/category' // Importa el modelo de Category
-import { CategoryService } from '../../_service/category.service'; // Importa el servicio de CategoryService
+import { Category } from '../../_model/category';
+import { CategoryService } from '../../_service/category.service';
+import { NgForm } from '@angular/forms';
+
+import $ from 'jquery';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css'] // Cambiado de styleUrl a styleUrls
+  styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
+  categories: Category[] = [];
+  newCategory: Category = { category_id: '', acronym: '', category: '', status: '' };
+  confirmationMessage: string = '';
 
-
-  categories: Category[] = []; // Variable para almacenar las categorías
-
-  constructor(private categoryService: CategoryService) { } // Inyecta el servicio CategoryService
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.getCategories(); // Llama a la función getCategories al inicializar el componente
+    this.getCategories();
   }
 
-  // Función para obtener categorías
   getCategories(): void {
-    this.categories = this.categoryService.getCategories(); // Llama a la función getCategories del servicio y asigna el resultado a la variable categories
+    this.categories = this.categoryService.getCategories();
   }
 
   toggleTheme() {
@@ -28,5 +30,13 @@ export class CategoryComponent implements OnInit {
     element.dataset['bsTheme'] = element.dataset['bsTheme'] === 'dark' ? 'light' : 'dark';
   }
 
+  createCategory(): void {
+    if (this.newCategory.acronym && this.newCategory.category) {
+      this.categories.push(this.newCategory);
+      this.newCategory = { category_id: '', acronym: '', category: '', status: '' }; // Limpiar los campos del formulario
+      this.confirmationMessage = 'Categoría creada exitosamente.';
 
+    }
+  }
 }
+

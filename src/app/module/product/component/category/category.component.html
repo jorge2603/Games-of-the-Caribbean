@@ -48,6 +48,13 @@
 </nav>
 <h1 class="h1">Categorias</h1>
 <div class="container">
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Nueva Categoria
+    </button>
+
+    <div *ngIf="confirmationMessage" class="alert alert-success">{{ confirmationMessage }}</div>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -66,4 +73,55 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Categoria</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form #categoryForm="ngForm" (ngSubmit)="createCategory()">
+
+                    <div class="mb-3">
+                        <label for="category_id" class="col-form-label">Category ID:</label>
+                        <input type="text" class="form-control" id="category_id" name="category_id" required
+                            [(ngModel)]="newCategory.category_id" #categoryInput="ngModel">
+                        <div *ngIf="categoryInput.invalid && (categoryInput.dirty || categoryInput.touched)"
+                            class="text-danger">
+                            ID es obligatorio.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="acronym" class="col-form-label">Acronym:</label>
+                        <input type="text" class="form-control" id="acronym" name="acronym" required
+                            [(ngModel)]="newCategory.acronym" #acronymInput="ngModel">
+                        <div *ngIf="acronymInput.invalid && (acronymInput.dirty || acronymInput.touched)"
+                            class="text-danger">
+                            Acrónimo es obligatorio.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="col-form-label">Category:</label>
+                        <input type="text" class="form-control" id="category" name="category" required
+                            [(ngModel)]="newCategory.category" #categoryInput="ngModel">
+                        <div *ngIf="categoryInput.invalid && (categoryInput.dirty || categoryInput.touched)"
+                            class="text-danger">
+                            Nombre de categoría es obligatorio.
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">Crear</button>
+
+            </div>
+        </div>
+    </div>
 </div>

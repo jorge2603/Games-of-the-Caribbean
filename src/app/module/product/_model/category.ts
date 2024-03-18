@@ -1,13 +1,13 @@
 export class Category {
-    category_id: number;
-    category: string;
+    category_id: string;
     acronym: string;
+    category: string;
     status: string;
 
-    constructor(category_id: number, category: string, acronym: string, status: string) {
+    constructor(category_id: string, acronym: string, category: string, status: string) {
         this.category_id = category_id;
-        this.category = category;
         this.acronym = acronym;
+        this.category = category;
         this.status = status;
     }
 }
