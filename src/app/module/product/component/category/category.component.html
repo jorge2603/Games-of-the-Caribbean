@@ -1,0 +1,118 @@
+<nav class="navbar navbar-expand-lg bg-custom" data-bs-theme="dark">
+
+    <div class="container-fluid">
+        <div class="form-check form-switch mx-4">
+            <input class="form-check-input p-2" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked
+                (click)="toggleTheme()" />
+
+        </div>
+        <a class="navbar-brand" href="#">Caribean</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Categorias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-sm-2" type="search" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit" fdprocessedid="iq6dz">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<h1 class="h1">Categorias</h1>
+<div class="container">
+
+    <button type="button" class="btn btn-primary" (click)="showModal()">Agregar categoria</button>
+        
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">category_id</th>
+                <th scope="col">acronym</th>
+                <th scope="col">category</th>
+                <th scope="col">status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories">
+                <th scope="row">{{ category.category_id }}</th>
+                <td>{{ category.acronym }}</td>
+                <td>{{ category.category }}</td>
+                <td>{{ category.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="categoryModal"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Nueva categoria</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                    <div class="mb-3">
+                        <label for="acronym" class="col-form-label">Acronym:</label>
+                        <input type="text" class="form-control" formControlName="acronym" required
+                        [ngClass]="{ 'is-invalid': form.controls['acronym'].errors && submitted }">
+
+                        @if(form.controls['acronym'].errors && submitted){
+                            <small class="invalid-feedback">
+                                Es necesario introducir un acronimo
+                            </small>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="col-form-label">Category:</label>
+                        <input type="text" class="form-control" formControlName="category" required
+                        [ngClass]="{ 'is-invalid': form.controls['category'].errors && submitted }">
+                       
+                            <div class="invalid-feedback">
+                                Es necesario introducir una categoria
+                            </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-new" >Guardar</button>
+                </div>
+                </form>
+            </div>
+            
+    </div>
+</div>
